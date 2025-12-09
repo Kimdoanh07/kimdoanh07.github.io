@@ -1,57 +1,362 @@
 <!doctype html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kim Doanh | Portfolio</title>
+  <meta name="description" content="Kim Doanh — International Economics student. Projects, skills, and contact." />
+  <meta name="theme-color" content="#0b1220" />
+
   <style>
-    :root{--bg:#0b1220;--card:#111b2e;--text:#e7eefc;--muted:#aab7d6;--line:#223155}
-    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
-    .wrap{max-width:980px;margin:0 auto;padding:28px}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-    .top{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-    .avatar{width:96px;height:96px;border-radius:999px;object-fit:cover;border:2px solid var(--line)}
-    h1{margin:0;font-size:28px} .muted{color:var(--muted)}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:16px}
-    a{color:inherit} .pill{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:999px;margin:6px 6px 0 0;text-decoration:none}
+    :root{
+      --bg:#0b1220;
+      --bg2:#0a0f1c;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(255,255,255,.08);
+      --line:rgba(255,255,255,.12);
+      --text:#eaf0ff;
+      --muted:rgba(234,240,255,.72);
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --r:20px;
+      --accent:#7aa7ff;
+      --accent2:#8bffcf;
+      --max:1080px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(122,167,255,.22), transparent 55%),
+        radial-gradient(900px 700px at 85% 30%, rgba(139,255,207,.16), transparent 55%),
+        radial-gradient(700px 600px at 50% 95%, rgba(122,167,255,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 16px 60px;}
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(11,18,32,.88), rgba(11,18,32,.55));
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700;
+      letter-spacing:.2px;
+      white-space:nowrap;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 4px rgba(122,167,255,.12);
+    }
+    nav{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    nav a{
+      text-decoration:none;
+      font-size:14px;
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid transparent;
+    }
+    nav a:hover{
+      color:var(--text);
+      border-color:rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 360px 1fr;
+      gap:16px;
+      align-items:start;
+      margin-top:18px;
+    }
+    @media (max-width: 900px){
+      .grid{grid-template-columns: 1fr;}
+    }
+
+    .card{
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,.04));
+      border:1px solid var(--line);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+    }
+
+    /* Left profile card */
+    .profile{
+      padding:18px;
+      position:sticky;
+      top:74px;
+    }
+    @media (max-width: 900px){
+      .profile{position:relative; top:auto;}
+    }
+    .avatar-row{display:flex; gap:14px; align-items:center;}
+    .avatar{
+      width:88px; height:88px; border-radius:999px;
+      border:2px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      overflow:hidden;
+      flex: 0 0 auto;
+    }
+    .avatar img{
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
+    .name{font-size:26px; font-weight:800; margin:0; line-height:1.1}
+    .headline{margin:6px 0 0; color:var(--muted); font-size:14px; line-height:1.35}
+    .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px;}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      text-decoration:none;
+      font-size:14px;
+    }
+    .btn:hover{background: rgba(255,255,255,.09)}
+    .btn.primary{
+      border-color: transparent;
+      background: linear-gradient(135deg, rgba(122,167,255,.9), rgba(139,255,207,.75));
+      color:#071225;
+      font-weight:700;
+    }
+    .btn.primary:hover{filter:brightness(1.03)}
+    .ico{width:16px; height:16px; display:inline-block}
+    .divider{height:1px; background: rgba(255,255,255,.10); margin:16px 0;}
+
+    /* Right content */
+    .content{padding:18px;}
+    .hero h2{margin:0; font-size:18px; color:var(--muted); font-weight:650}
+    .hero h1{margin:8px 0 10px; font-size:34px; line-height:1.15}
+    .hero p{margin:0; color:var(--muted); line-height:1.65}
+    .hero-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+
+    section{padding:18px; margin-top:14px}
+    section h3{margin:0 0 10px; font-size:18px}
+    .sub{color:var(--muted); margin:0; line-height:1.65}
+
+    .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
+    .chip{
+      font-size:13px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color:rgba(234,240,255,.88);
+    }
+
+    .proj-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:12px;
+      margin-top:10px;
+    }
+    @media (max-width: 700px){
+      .proj-grid{grid-template-columns:1fr;}
+    }
+    .proj{
+      padding:14px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    }
+    .proj h4{margin:0 0 6px; font-size:16px}
+    .proj p{margin:0; color:var(--muted); line-height:1.55}
+    .proj .links{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+    .link{
+      text-decoration:none;
+      font-size:13px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+    }
+    .link:hover{background: rgba(255,255,255,.08)}
+    footer{
+      margin-top:16px;
+      color: rgba(234,240,255,.55);
+      font-size:13px;
+      text-align:center;
+    }
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
   </style>
 </head>
-<body>
-  <main class="wrap">
-    <section class="card">
-      <div class="top">
-        <img class="avatar" src="avatar.jpg.jpg" alt="Ảnh đại diện" />
-        <div>
-          <h1>Kim Doanh</h1>
-          <div class="muted">Sinh viên Kinh tế quốc tế • Trường Đại học Ngoại Thương</div>
-          <div style="margin-top:10px">
-            <a class="pill" href="https://github.com/kimdoanh07" target="_blank" rel="noreferrer">GitHub</a>
-            <a class="pill" href="mailto:you@email.com">Email</a>
-            <a class="pill" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
-          </div>
-        </div>
-      </div>
 
-      <h2 style="margin:18px 0 6px">Dự án nổi bật</h2>
-      <div class="grid">
-        <div class="card">
-          <b>Project 1</b>
-          <div class="muted">Mô tả ngắn 1–2 dòng…</div>
-          <div style="margin-top:10px">
-            <a class="pill" href="#" target="_blank" rel="noreferrer">Live</a>
-            <a class="pill" href="#" target="_blank" rel="noreferrer">Code</a>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><span class="dot"></span> <span class="mono">kimdoanh07</span></div>
+      <nav aria-label="Primary">
+        <a href="#home">Home</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="grid">
+      <!-- Left -->
+      <aside class="card profile">
+        <div class="avatar-row">
+          <div class="avatar" aria-label="Profile photo">
+            <!-- Put your photo in the repo root with EXACT name: avatar.jpg -->
+            <img src="avatar.jpg.jpg" alt="Kim Doanh profile photo" onerror="this.style.display='none';" />
+          </div>
+          <div>
+            <p class="name">Kim Doanh</p>
+            <p class="headline">International Economics student • Foreign Trade University (FTU), Vietnam</p>
           </div>
         </div>
-        <div class="card">
-          <b>Project 2</b>
-          <div class="muted">Mô tả ngắn 1–2 dòng…</div>
-          <div style="margin-top:10px">
-            <a class="pill" href="#" target="_blank" rel="noreferrer">Live</a>
-            <a class="pill" href="#" target="_blank" rel="noreferrer">Code</a>
+
+        <div class="actions">
+          <!-- Replace links below -->
+          <a class="btn" href="https://github.com/kimdoanh07" target="_blank" rel="noopener">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.55 2.87 8.4 6.84 9.76.5.1.68-.22.68-.48 0-.24-.01-1.03-.01-1.86-2.78.62-3.37-1.1-3.37-1.1-.46-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.63.07-.63 1.01.07 1.54 1.06 1.54 1.06.9 1.58 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05.8-.23 1.66-.34 2.51-.34.85 0 1.71.12 2.51.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.8-4.57 5.06.36.32.68.95.68 1.92 0 1.39-.01 2.5-.01 2.84 0 .26.18.59.69.48A10.2 10.2 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/>
+            </svg>
+            GitHub
+          </a>
+
+          <a class="btn" href="mailto:yourname@email.com">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4.2-8 5.33L4 8.2V6l8 5.33L20 6v2.2Z"/>
+            </svg>
+            Email
+          </a>
+
+          <a class="btn" href="https://www.linkedin.com/in/your-linkedin/" target="_blank" rel="noopener">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path fill="currentColor" d="M6.94 6.5A2.44 2.44 0 1 1 7 1.62a2.44 2.44 0 0 1-.06 4.88ZM2.75 22h4.3V8.5h-4.3V22Zm6.92 0h4.3v-7.1c0-4 4.9-4.3 4.9 0V22h4.3v-8.6c0-6.7-7.6-6.5-9.2-3.2V8.5h-4.3V22Z"/>
+            </svg>
+            LinkedIn
+          </a>
+
+          <!-- Put your CV in repo root with EXACT name: cv.pdf -->
+          <a class="btn primary" href="cv.pdf" target="_blank" rel="noopener">Download CV</a>
+        </div>
+
+        <div class="divider"></div>
+
+        <p class="sub" style="margin:0">
+          I enjoy turning messy information into clear insights—through economics, data, and practical projects.
+        </p>
+      </aside>
+
+      <!-- Right -->
+      <main class="card content" id="home">
+        <div class="hero">
+          <h2>Hello, I’m</h2>
+          <h1>Kim Doanh</h1>
+          <p>
+            I’m an <strong>International Economics</strong> student at <strong>Foreign Trade University (FTU)</strong>.
+            I’m building skills in data analysis (Excel, SQL, Python, Power BI) and want to grow into a role in
+            analytics, business, or finance-related fields.
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn primary" href="#projects">View my projects</a>
+            <a class="btn" href="#contact">Contact me</a>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
+
+        <section class="card" id="education">
+          <h3>Education</h3>
+          <p class="sub"><strong>Foreign Trade University (FTU)</strong> — B.A. in International Economics (2023–2027)</p>
+        </section>
+
+        <section class="card" id="skills">
+          <h3>Skills</h3>
+          <p class="sub">Tools and topics I’m currently using / learning:</p>
+          <div class="chips">
+            <span class="chip">Excel</span>
+            <span class="chip">Power BI</span>
+            <span class="chip">SQL</span>
+            <span class="chip">Python</span>
+            <span class="chip">Statistics</span>
+            <span class="chip">Microeconomics</span>
+            <span class="chip">Data Visualization</span>
+            <span class="chip">Presentation</span>
+          </div>
+        </section>
+
+        <section class="card" id="projects">
+          <h3>Projects</h3>
+          <p class="sub">A few highlights (replace these with your real projects + links):</p>
+
+          <div class="proj-grid">
+            <div class="proj">
+              <h4>Project 1 — Data Analysis (Excel/Power BI)</h4>
+              <p>Dashboard/report that summarizes key metrics and trends. Include what you learned + result.</p>
+              <div class="links">
+                <a class="link" href="#" target="_blank" rel="noopener">Live</a>
+                <a class="link" href="#" target="_blank" rel="noopener">Code</a>
+              </div>
+            </div>
+
+            <div class="proj">
+              <h4>Project 2 — SQL Practice & Queries</h4>
+              <p>JOINs, CTEs, window functions, and clean query structure for analytics.</p>
+              <div class="links">
+                <a class="link" href="#" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </div>
+
+            <div class="proj">
+              <h4>Project 3 — Economics Mini Research</h4>
+              <p>Short research write-up: question → method → findings → implications.</p>
+              <div class="links">
+                <a class="link" href="#" target="_blank" rel="noopener">Read</a>
+              </div>
+            </div>
+
+            <div class="proj">
+              <h4>Project 4 — Coursework / Case Study</h4>
+              <p>Academic case study with analysis and recommendations.</p>
+              <div class="links">
+                <a class="link" href="#" target="_blank" rel="noopener">Details</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card" id="contact">
+          <h3>Contact</h3>
+          <p class="sub">If you want to talk about projects, opportunities, or collaborations, feel free to reach out.</p>
+          <div class="chips" style="margin-top:12px">
+            <span class="chip">Email: yourname@email.com</span>
+            <span class="chip">GitHub: github.com/kimdoanh07</span>
+            <span class="chip">LinkedIn: /in/your-linkedin</span>
+          </div>
+        </section>
+
+        <footer>
+          © <span id="y"></span> Kim Doanh • Built with GitHub Pages
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
